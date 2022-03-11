@@ -1,0 +1,23 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Homepage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+	var threeLastFilms = Umbraco.ContentAtRoot().FirstOrDefault().ChildrenOfType("film");
+}
+
+<section>
+	<h1>@Model.Value("headerText")</h1>
+	<h2>@Model.Value("headerSubtitle")</h2>
+</section>
+
+@Html.GetGridHtml(Model, "grid")
+
+
+Nos derniers films:
+@foreach (var film in threeLastFilms)
+{
+	<div>
+		<img src="@film.Value("poster")"/>
+	</div>
+}
