@@ -1,10 +1,16 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
+    var firstLevelChild = Umbraco.ContentSingleAtXPath("/root/homepage").Children();
 }
 <html>
     @await Html.PartialAsync("Composition/Head")
+    <div class="navbar">
+        <li class="logo"><a href="/"><img src="/images/logo.png"></a></li>
 
+        @foreach (var item in firstLevelChild)
+        {
+            <li class="buttons"><a href="@item.Url()">@item.Name</a></li>
+        }
+    </div>
     @RenderBody()
 </html>
