@@ -1,13 +1,13 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-    var firstLevelChild = Umbraco.ContentSingleAtXPath("/root/homepage").Children();
+    var firstLevelChilds = Umbraco.ContentSingleAtXPath("/root/homepage").Children();
 }
 <html>
     @await Html.PartialAsync("Composition/Head")
     <div class="navbar">
         <li class="logo"><a href="/"><img src="/images/logo.png"></a></li>
 
-        @foreach (var item in firstLevelChild)
+        @foreach (var item in firstLevelChilds)
         {
             <li class="buttons"><a href="@item.Url()">@item.Name</a></li>
         }

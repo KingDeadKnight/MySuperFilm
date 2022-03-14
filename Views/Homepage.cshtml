@@ -2,11 +2,7 @@
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @{
     Layout = "Master.cshtml";
-    var threeLastFilms = Umbraco.ContentAtRoot()
-        .FirstOrDefault()
-        .DescendantsOfType("film")
-        .OrderByDescending(f => f.CreateDate)
-        .Take(3);
+    var threeLastFilms = Umbraco.ContentAtRoot().FirstOrDefault().DescendantsOfType("film").OrderByDescending(f => f.CreateDate).Take(3);
 }
 <body>
 
