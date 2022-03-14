@@ -1,6 +1,48 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Film>
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<FilmViewModel>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @{
-	Layout = "Master.cshtml";
+    Layout = "Master.cshtml";
 }
+
+
+<div class="main">
+    <div class="area">
+        <h1>@Model.Title</h1>
+    </div>
+</div>
+
+<div class="film">
+    <img src="@Model.PosterUrl" />
+    <div class="infos">
+        <h2>@Model.Title</h2>
+        <span>
+            <h3>@Umbraco.GetDictionaryValue("Site.Film.Duration")</h3>
+            @Model.Duration @Umbraco.GetDictionaryValue("Site.Film.DurationUnit")
+        </span>
+        <div>
+            <h3>@Umbraco.GetDictionaryValue("Site.Film.Categories")</h3>
+
+            <ul>
+                @foreach (var tag in Model.Categories)
+                {
+                    <li>@tag</li>
+                }
+            </ul>
+        </div>
+        <h3>@Umbraco.GetDictionaryValue("Site.Film.Synopsis")</h3>
+        @Model.Synopsis
+
+    </div>
+</div>
+<div class="comments">
+    <h3>@Umbraco.GetDictionaryValue("Site.Film.Comments")</h3>
+    @using (Html.BeginUmbracoForm<CommentController>(nameof(CommentController.Submit)))
+    {
+        <label>@Umbraco.GetDictionaryValue("Site.Film.Comment")</label>
+        @Html.TextArea("comment");
+
+        <input type="submit" name="@Umbraco.GetDictionaryValue("Site.Film.SendComment")" />
+    }
+
+    @*Here goes the list*@
+</div>

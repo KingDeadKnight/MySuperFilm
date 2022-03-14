@@ -1,11 +1,8 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Homepage>
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<HomepageViewModel>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @{
     Layout = "Master.cshtml";
-    var threeLastFilms = Umbraco.ContentAtRoot().FirstOrDefault().DescendantsOfType("film").OrderByDescending(f => f.CreateDate).Take(3);
 }
-<body>
-
 <div class="main">
     <div class="area">
         <h1>@Model.HeaderTitle</h1>
@@ -13,17 +10,16 @@
     </div>
 
 </div>
-@Html.GetGridHtml(Model, "grid")
+@Html.GetGridHtml(Model.Content, "grid")
 
 <section class="featuredFilms">
     <h1>@Umbraco.GetDictionaryValue("Site.OurLastFilms")</h1>
     <div class="lastFilms">
-    @foreach (var film in threeLastFilms)
+    @foreach (var film in Model.FeaturedFilms)
     {
-        <a href="@film.Url()">
-            <img src="@(film.Value<IPublishedContent>("poster").Url())"/>
+        <a href="@film.FilmUrl">
+            <img src="@film.PosterUrl"/>
         </a>
     }
     </div>
 </section>
-</body>

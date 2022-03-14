@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MySuperFilm.Repositories;
 using Umbraco.Cms.Core.DependencyInjection;
 using Umbraco.Extensions;
 
@@ -44,6 +45,8 @@ namespace MySuperFilm
                 .AddWebsite()
                 .AddComposers()
                 .Build();
+
+            services.AddTransient(typeof(ContentRepository));
 #pragma warning restore IDE0022 // Use expression body for methods
 
         }
@@ -61,17 +64,17 @@ namespace MySuperFilm
             }
 
             app.UseUmbraco()
-                .WithMiddleware(u =>
-                {
+               .WithMiddleware(u =>
+               {
                     u.UseBackOffice();
                     u.UseWebsite();
-                })
-                .WithEndpoints(u =>
-                {
+               })
+               .WithEndpoints(u =>
+               {
                     u.UseInstallerEndpoints();
                     u.UseBackOfficeEndpoints();
                     u.UseWebsiteEndpoints();
-                });
+               });
         }
     }
 }

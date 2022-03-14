@@ -1,16 +1,27 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BaseViewModel>
 @{
-    var firstLevelChilds = Umbraco.ContentSingleAtXPath("/root/homepage").Children();
 }
 <html>
     @await Html.PartialAsync("Composition/Head")
-    <div class="navbar">
-        <li class="logo"><a href="/"><img src="/images/logo.png"></a></li>
+    <body>
+        <div class="navbar">
+            <li class="logo"><a href="/"><img src="/images/logo.png"></a></li>
 
-        @foreach (var item in firstLevelChilds)
-        {
-            <li class="buttons"><a href="@item.Url()">@item.Name</a></li>
-        }
-    </div>
-    @RenderBody()
+            @foreach (var item in Model.MainMenuItems)
+            {
+                <li class="buttons"><a href="@item.Url()">@item.Name</a></li>
+            }
+        </div>
+        @RenderBody()
+        <div class="footer">
+            <div class="footercon">
+                <ul class="list1">
+                    @foreach (var item in Model.FooterMenuItems)
+                    {
+                        <li><a href="@item.Url()">@item.Name</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </body>
 </html>

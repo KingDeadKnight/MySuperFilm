@@ -1,15 +1,57 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Films>
-@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<FilmsViewModel>
 @{
-	Layout = "Master.cshtml";
+    Layout = "Master.cshtml";
+
+    var searchQuery = Context.Request.Query["search"];
+    if (!string.IsNullOrEmpty(searchQuery)) { 
+        Model.Films = Model.Films.Where(f => f.Title.Contains(searchQuery, StringComparison.InvariantCultureIgnoreCase)
+                                             || f.Categories.Any(c => c.Contains(searchQuery, StringComparison.InvariantCultureIgnoreCase)));  
+    }
 }
 
 
 <div class="main">
-	<div class="area">
-		<h1>@Model.HeaderTitle</h1>
-		<h3>@Model.HeaderSubtitle</h3>
-	</div>
-
+    <div class="area">
+        <h1>@Model.HeaderTitle</h1>
+        <h3>@Model.HeaderSubtitle</h3>
+        <div class="search">
+            <input type="text" id="searchField" class="box" value="@searchQuery" placeholder="@Umbraco.GetDictionaryValue("Site.Film.SearchPlaceholder")">
+            <span class="try" id="searchBtn">
+                @Umbraco.GetDictionaryValue("Site.Film.Search") <i class="fas fa-search"></i>
+            </span>
+        </div>
+    </div>
 </div>
+
+<div class="ourFilms">
+@foreach (var film in Model.Films)
+{
+    <div class="film">
+        <a href="@film.FilmUrl">
+            <img src="@(film.PosterUrl)" />
+            <h3>
+
+                @film.Title
+            </h3>
+        </a>
+        <ul>
+            @foreach (var tag in film.Categories)
+            {
+                <li>@tag</li>
+            }
+        </ul>
+    </div>
+}
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let searchButton = document.getElementById("searchBtn");
+        
+        searchButton.addEventListener('click', () => {
+            let searchField = document.getElementById("searchField").value;
+            document.location.search = `search=${searchField}`
+        });
+    }, false);
+</script>
+

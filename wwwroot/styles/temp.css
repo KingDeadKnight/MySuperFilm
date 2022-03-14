@@ -8,8 +8,10 @@ body {
     flex-wrap: wrap;
     display: flex;
     font-family: "Roboto", sans-serif;
-
+    color: white;
     background-color: rgba(8, 8, 8, 0.89);
+
+    box-sizing: border-box;
 }
 
 .navbar {
@@ -21,7 +23,7 @@ body {
     height: 50px;
     min-height: 100px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     background-color: transparent;
     align-self: center;
 }
@@ -120,11 +122,16 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     background-color: #e50914;
-    min-height: 70px;
-    width: 70%;
+    min-height: 65px;
+    width: 40%;
     font-size: 30px;
     text-transform: uppercase;
+}
+
+.try i {
+    margin: 0 10px;
 }
 
 .area h4 {
@@ -575,5 +582,41 @@ li a {
 }
 
 .featuredFilms h1 {
+    color: white;
+}
+
+.ourFilms {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    color: white;
+}
+
+.ourFilms .film {
+    display: flex;
+    flex-direction: column;
+    margin: 0 45px;
+}
+
+.ourFilms .film ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+}
+
+.ourFilms .film h3 {
+    text-align: center;
+}
+
+.ourFilms .film a {
+    text-decoration: none;
+    color: white;
+}
+
+.film {
+    display: flex;
     color: white;
 }
