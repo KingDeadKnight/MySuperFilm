@@ -36,13 +36,5 @@
 </div>
 <div class="comments">
     <h3>@Umbraco.GetDictionaryValue("Site.Film.Comments")</h3>
-    @using (Html.BeginUmbracoForm<CommentController>(nameof(CommentController.Submit)))
-    {
-        <label>@Umbraco.GetDictionaryValue("Site.Film.Comment")</label>
-        @Html.TextArea("comment");
-
-        <input type="submit" name="@Umbraco.GetDictionaryValue("Site.Film.SendComment")" />
-    }
-
-    @*Here goes the list*@
+    
 </div>
