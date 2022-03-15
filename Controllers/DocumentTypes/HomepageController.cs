@@ -22,6 +22,12 @@ namespace MySuperFilm.Controllers.DocumentTypes
         public override IActionResult Index()
         {
             return this.CurrentTemplate(new HomepageViewModel(CurrentPage, contentRepository));
+            //return this.Homepage2();
+        }
+
+        public IActionResult Homepage2()
+        {
+            return this.CurrentTemplate(CurrentPage);
         }
     }
 }
