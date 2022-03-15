@@ -1,0 +1,13 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BasePageViewModel>
+@{
+    Layout = "Master.cshtml";
+}
+
+<div class="main">
+    <div class="area">
+        <h1>@Model.Name</h1>
+    </div>
+
+</div>
+
+@Html.GetGridHtml(Model.Content, "grid")
