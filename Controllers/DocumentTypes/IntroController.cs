@@ -8,9 +8,9 @@ using Umbraco.Cms.Web.Common.Controllers;
 
 namespace MySuperFilm.Controllers.DocumentTypes
 {
-    public class FilmsController : BaseController
+    public class IntroController : BaseController
     {
-        public FilmsController(
+        public IntroController(
             ILogger<RenderController> logger,
             ICompositeViewEngine compositeViewEngine,
             IUmbracoContextAccessor umbracoContextAccessor,
@@ -21,13 +21,7 @@ namespace MySuperFilm.Controllers.DocumentTypes
 
         public override IActionResult Index()
         {
-            var filmsViewModel = new FilmsViewModel(CurrentPage, contentRepository);
-            var search = this.HttpContext.Request.Query["search"];
-            if(!string.IsNullOrEmpty(search))
-            {
-
-            }
-            return CurrentTemplate(filmsViewModel);
+            return CurrentTemplate(new IntroViewModel(CurrentPage, contentRepository));
         }
     }
 }
