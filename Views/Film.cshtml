@@ -1,5 +1,4 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<FilmViewModel>
-@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @{
     Layout = "Master.cshtml";
 }
@@ -31,7 +30,6 @@
         </div>
         <h3>@Umbraco.GetDictionaryValue("Site.Film.Synopsis")</h3>
         @Model.Synopsis
-
     </div>
 </div>
 <div class="comments">
