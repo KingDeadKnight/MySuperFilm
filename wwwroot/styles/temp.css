@@ -338,13 +338,14 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-height: 375px;
+    min-height: 150px;
     background-color: black;
     margin-top: 10px;
     flex-wrap: wrap;
     align-items:center;
     justify-content:space-around;
-
+    bottom: 0;
+    position:absolute;
 }
 
 .footercon {

@@ -11,15 +11,18 @@
             }
         </div>
         @RenderBody()
-        <div class="footer">
-            <div class="footercon">
-                <ul class="list1">
-                    @foreach (var item in Model.FooterMenuItems)
-                    {
-                        <li><a href="@item.Url()">@item.Name</a></li>
-                    }
-                </ul>
+        @if (Model.FooterMenuItems.Any())
+        {
+            <div class="footer">
+                <div class="footercon">
+                    <ul class="list1">
+                        @foreach (var item in Model.FooterMenuItems)
+                        {
+                            <li><a href="@item.Url()">@item.Name</a></li>
+                        }
+                    </ul>
+                </div>
             </div>
-        </div>
+        }
     </body>
 </html>
