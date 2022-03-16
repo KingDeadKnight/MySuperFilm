@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MySuperFilm.Data;
 using MySuperFilm.Repositories;
 using Umbraco.Cms.Core.DependencyInjection;
 using Umbraco.Extensions;
@@ -47,6 +48,8 @@ namespace MySuperFilm
                 .Build();
 
             services.AddTransient(typeof(ContentRepository));
+            services.AddTransient(typeof(OmdbApiRepository));
+            services.AddHttpClient();
 #pragma warning restore IDE0022 // Use expression body for methods
 
         }

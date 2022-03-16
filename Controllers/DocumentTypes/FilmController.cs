@@ -8,26 +8,28 @@ using Umbraco.Cms.Web.Common.Controllers;
 
 namespace MySuperFilm.Controllers.DocumentTypes
 {
-    public class FilmsController : BaseController
+    public class FilmController : BaseController
     {
-        public FilmsController(
+        private readonly OmdbApiRepository omdbApiRepository;
+
+        public FilmController(
             ILogger<RenderController> logger,
             ICompositeViewEngine compositeViewEngine,
             IUmbracoContextAccessor umbracoContextAccessor,
-            ContentRepository contentRepository)
+            ContentRepository contentRepository,
+            OmdbApiRepository omdbApiRepository)
             : base(logger, compositeViewEngine, umbracoContextAccessor, contentRepository)
         {
+            this.omdbApiRepository = omdbApiRepository;
         }
 
         public override IActionResult Index()
         {
-            var filmsViewModel = new FilmsViewModel(CurrentPage, contentRepository);
-            var search = this.HttpContext.Request.Query["search"];
-            if(!string.IsNullOrEmpty(search))
-            {
-
-            }
-            return CurrentTemplate(filmsViewModel);
+            var film = new FilmViewModel(CurrentPage, contentRepository);
+            var filmFromApi = this.omdbApiRepository.GetFilm(film.Title).Result;
+            film.Rated = filmFromApi.Rated;
+            film.Released = filmFromApi.Released;
+            return this.CurrentTemplate(film);
         }
     }
 }

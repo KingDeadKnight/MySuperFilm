@@ -1,0 +1,9 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IntroViewModel>
+@{
+	Layout = "Master.cshtml";
+}
+
+@Model.Value1
+
+<a href="@Model.Value2Url">Lien</a>
+<img src="@Model.Value3Url" />

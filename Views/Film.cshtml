@@ -1,11 +1,17 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Film>
-@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<FilmViewModel>
 @{
     Layout = "Master.cshtml";
 }
+
+
+<div class="main">
+    <div class="area">
+        <h1>@Model.Title</h1>
+    </div>
+</div>
+
 <div class="film">
-    <img src="@(Model.Value<IPublishedContent>("poster").Url())" />
+    <img src="@Model.PosterUrl" />
     <div class="infos">
         <h2>@Model.Title</h2>
         <span>
@@ -24,6 +30,13 @@
         </div>
         <h3>@Umbraco.GetDictionaryValue("Site.Film.Synopsis")</h3>
         @Model.Synopsis
+        <h3>Données depuis un service externe</h3>
+        <div>
+            Rated: @Model.Rated
+        </div>
+        <div>
+            Released: @Model.Released
+        </div>
     </div>
 </div>
 <div class="comments">
