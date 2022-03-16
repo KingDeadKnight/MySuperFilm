@@ -10,6 +10,8 @@
 
         public int FilmNodeId { get; set; }
 
+        public int? MemberId { get; set; }
+
         public string Text { get; set; }
 
         public DateTime CreatedDate { get; set; }

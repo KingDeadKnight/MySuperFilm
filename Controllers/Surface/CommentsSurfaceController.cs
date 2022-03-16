@@ -7,6 +7,7 @@
     using Umbraco.Cms.Core.Cache;
     using Umbraco.Cms.Core.Logging;
     using Umbraco.Cms.Core.Routing;
+    using Umbraco.Cms.Core.Security;
     using Umbraco.Cms.Core.Services;
     using Umbraco.Cms.Core.Web;
     using Umbraco.Cms.Infrastructure.Persistence;
@@ -17,6 +18,8 @@
     public class CommentsSurfaceController : SurfaceController
     {
         private readonly CommentRepository _commentRepository;
+        private readonly IMemberService _memberService;
+        private readonly IMemberManager _memberManager;
 
         public CommentsSurfaceController(
             IUmbracoContextAccessor umbracoContextAccessor,
@@ -25,10 +28,14 @@
             AppCaches appCaches,
             IProfilingLogger profilingLogger,
             IPublishedUrlProvider publishedUrlProvider,
-            CommentRepository commentRepository)
+            CommentRepository commentRepository,
+            IMemberService memberService,
+            IMemberManager memberManager)
             : base(umbracoContextAccessor, databaseFactory, services, appCaches, profilingLogger, publishedUrlProvider)
         {
             _commentRepository = commentRepository;
+            _memberService = memberService;
+            _memberManager = memberManager;
         }
 
         [HttpPost]
@@ -41,6 +48,7 @@
                 return CurrentUmbracoPage();
             }
 
+            createCommentModel.MemberId = int.Parse((await this._memberManager.GetCurrentMemberAsync()).Id);
             /*
              new Data.Models.Comment {
 

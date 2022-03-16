@@ -1,6 +1,8 @@
 ﻿@using MySuperFilm.Controllers.Surface
 @using MySuperFilm.ViewModels.Surface
 @using System.Globalization
+@using Umbraco.Cms.Core.Security
+@inject IMemberManager _memberManager
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<FilmViewModel>
 @{
     var commentModel = new CreateCommentModel
@@ -48,19 +50,26 @@
 </div>
 <div class="comments">
     <h3>@Umbraco.GetDictionaryValue("Site.Film.Comments")</h3>
-    @using (Html.BeginUmbracoForm<CommentsSurfaceController>("SubmitComment"))
+    @if (!_memberManager.IsLoggedIn())
     {
-        <input asp-for="@commentModel.FilmNodeId"/>
-        <label asp-for="@commentModel.Comment"></label>
-        <textarea asp-for="@commentModel.Comment"></textarea>
-        <span asp-validation-for="@commentModel.Comment"></span>
-        <button type="submit">Submit</button>
+        @Html.Partial("Login")
+    }
+    else
+    {
+        using (Html.BeginUmbracoForm<CommentsSurfaceController>("SubmitComment"))
+        {
+            <input asp-for="@commentModel.FilmNodeId"/>
+            <label asp-for="@commentModel.Comment"></label>
+            <textarea asp-for="@commentModel.Comment"></textarea>
+            <span asp-validation-for="@commentModel.Comment"></span>
+            <button type="submit">Submit</button>
+        }
     }
     @foreach (var comment in Model.Comments)
     {
         <div class="comment">
             @comment.Text
-            <small>Ajouté le @comment.CreatedDate.ToString("g")</small>
+            <small>Ajouté le @comment.CreatedDate.ToString("g") par @comment.Username</small>
         </div>
     }
 </div>

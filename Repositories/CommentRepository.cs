@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
     using Data;
     using Data.Models;
+    using Microsoft.EntityFrameworkCore;
     using ViewModels.DocumentTypes;
     using ViewModels.Surface;
 
@@ -25,7 +26,8 @@
                            {
                                Text = createCommentModel.Comment,
                                CreatedDate = DateTime.Now,
-                               FilmNodeId = createCommentModel.FilmNodeId
+                               FilmNodeId = createCommentModel.FilmNodeId,
+                               MemberId = createCommentModel.MemberId,
                            };
 
             this._context.Comments.Add(dbEntity);
@@ -34,6 +36,7 @@
 
         public IEnumerable<Comment> GetCommentsByFilm(int filmNodeId)
             => this._context.Comments
-                   .Where(c => c.FilmNodeId == filmNodeId);
+                   .Where(c => c.FilmNodeId == filmNodeId)
+                   .AsNoTracking();
     }
 }

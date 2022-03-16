@@ -9,10 +9,13 @@ using Umbraco.Cms.Web.Common.Controllers;
 namespace MySuperFilm.Controllers.DocumentTypes
 {
     using System.Linq;
+    using Umbraco.Cms.Core.Security;
+    using Umbraco.Cms.Core.Services;
 
     public class FilmController : BaseController
     {
         private readonly OmdbApiRepository omdbApiRepository;
+        private readonly IMemberService _memberService;
         private readonly CommentRepository commentRepository;
 
         public FilmController(
@@ -21,10 +24,12 @@ namespace MySuperFilm.Controllers.DocumentTypes
             IUmbracoContextAccessor umbracoContextAccessor,
             ContentRepository contentRepository,
             OmdbApiRepository omdbApiRepository,
+            IMemberService memberService,
             CommentRepository commentRepository)
             : base(logger, compositeViewEngine, umbracoContextAccessor, contentRepository)
         {
             this.omdbApiRepository = omdbApiRepository;
+            _memberService = memberService;
             this.commentRepository = commentRepository;
         }
 
@@ -39,6 +44,9 @@ namespace MySuperFilm.Controllers.DocumentTypes
                                 .GetCommentsByFilm(CurrentPage.Id)
                                 .Select(c => new CommentViewModel()
                                              {
+                                                 Username = c.MemberId.HasValue
+                                                                ? $"{this._memberService.GetById(c.MemberId.Value).Username} {this._memberService.GetById(c.MemberId.Value).GetValue<int>("age")}"
+                                                                : "Anonyme",
                                                  Text = c.Text,
                                                  CreatedDate = c.CreatedDate
                                              });

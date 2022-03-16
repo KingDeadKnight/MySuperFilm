@@ -10,5 +10,8 @@
 
         [HiddenInput]
         public int FilmNodeId { get; set; }
+
+        [HiddenInput]
+        public int MemberId { get; set; }
     }
 }
