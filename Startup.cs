@@ -47,8 +47,6 @@ namespace MySuperFilm
                 .AddComposers()
                 .Build();
 
-            //services.AddScoped<MySuperFilmContext>(_ =>
-            //    new MySuperFilmContext(this._config.GetConnectionString("umbracoDbDSN")));
             services.AddTransient(typeof(ContentRepository));
             services.AddTransient(typeof(OmdbApiRepository));
             services.AddHttpClient();

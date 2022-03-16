@@ -17,9 +17,6 @@
     <ItemGroup>
       <None Include="wwwroot\styles\temp.css" />
     </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Controllers\Surface\" />
-    </ItemGroup>
 
 
 
