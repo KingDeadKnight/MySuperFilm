@@ -621,3 +621,9 @@ li a {
     display: flex;
     color: white;
 }
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0px;
+}

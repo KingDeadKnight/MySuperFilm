@@ -2,16 +2,16 @@
 <html>
     @await Html.PartialAsync("Composition/Head")
     <body>
-        <div class="navbar">
-            <li class="logo"><a href="/"><img src="/images/logo.png"></a></li>
+    <div class="navbar">
+        <li class="logo"><a href="/"><img src="/images/logo.png"></a></li>
 
-            @foreach (var item in Model.MainMenuItems)
-            {
-                <li class="buttons"><a href="@item.Url()">@item.Name</a></li>
-            }
-        </div>
+        @foreach (var item in Model.MainMenuItems)
+        {
+            <li class="buttons"><a href="@item.Url()">@item.Name</a></li>
+        }
+    </div>
         @RenderBody()
-        @if (Model.FooterMenuItems.Any())
+        @if (!Model.FooterMenuItems.Any())
         {
             <div class="footer">
                 <div class="footercon">

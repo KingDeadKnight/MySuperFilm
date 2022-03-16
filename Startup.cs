@@ -1,15 +1,17 @@
-using System;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using MySuperFilm.Repositories;
-using Umbraco.Cms.Core.DependencyInjection;
-using Umbraco.Extensions;
-
 namespace MySuperFilm
 {
+    using System;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using MySuperFilm.Repositories;
+    using Umbraco.Cms.Core.DependencyInjection;
+    using Umbraco.Extensions;
+    using Data;
+    using Microsoft.EntityFrameworkCore;
+
     public class Startup
     {
         private readonly IWebHostEnvironment _env;
@@ -46,7 +48,11 @@ namespace MySuperFilm
                 .AddComposers()
                 .Build();
 
+            var optionsBuilder = new DbContextOptionsBuilder()
+                .UseSqlServer(this._config.GetConnectionString("umbracoDbDSN"));
+            services.AddScoped<DataContext>(_ => new DataContext(optionsBuilder.Options));
             services.AddTransient(typeof(ContentRepository));
+            services.AddTransient(typeof(CommentRepository));
             services.AddTransient(typeof(OmdbApiRepository));
             services.AddHttpClient();
 #pragma warning restore IDE0022 // Use expression body for methods

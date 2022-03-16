@@ -9,6 +9,8 @@ using Umbraco.Extensions;
 
 namespace MySuperFilm.ViewModels.DocumentTypes
 {
+    using System.Collections;
+
     public class FilmViewModel : BaseViewModel
     {
         public FilmViewModel(
@@ -37,5 +39,7 @@ namespace MySuperFilm.ViewModels.DocumentTypes
         public IHtmlEncodedString Synopsis { get; set; }
         public string Rated { get; set; }
         public string Released { get; set; }
+
+        public IEnumerable<CommentViewModel> Comments { get; set; }
     }
 }
