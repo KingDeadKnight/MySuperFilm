@@ -16,12 +16,12 @@ namespace MySuperFilm.Repositories
         }
 
         public IEnumerable<IPublishedContent> GetMainMenu()
-            => this.umbracoHelper.ContentSingleAtXPath("/root/homepage")
+            => this.umbracoHelper.ContentSingleAtXPath("/root/site/homepage")
                                  .Children()
                                  .Where(p => p.Value<bool>("mainMenu"));
 
         public IEnumerable<IPublishedContent> GetFooterMenu()
-            => this.umbracoHelper.ContentSingleAtXPath("/root/homepage")
+            => this.umbracoHelper.ContentSingleAtXPath("/root/site/homepage")
                                  .Children()
                                  .Where(p => p.Value<bool>("footerMenu"));
     }

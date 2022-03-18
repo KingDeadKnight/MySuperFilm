@@ -89,6 +89,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual string Title => this.Value<string>(_publishedValueFallback, "title");
 
 		///<summary>
+		/// UsyncTest
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "9.3.1+3a269ed3293c8e22bd9a546f424402c0a491964f")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("usyncTest")]
+		public virtual string UsyncTest => this.Value<string>(_publishedValueFallback, "usyncTest");
+
+		///<summary>
 		/// Menu Footer
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "9.3.1+3a269ed3293c8e22bd9a546f424402c0a491964f")]

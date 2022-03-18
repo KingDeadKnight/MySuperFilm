@@ -2,6 +2,7 @@ namespace MySuperFilm
 {
     using System;
     using System.IO;
+    using Core;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
@@ -60,6 +61,7 @@ namespace MySuperFilm
             services.AddTransient(typeof(CommentRepository));
             services.AddTransient(typeof(OmdbApiRepository));
             services.AddHttpClient();
+            services.AddOptions<Settings>().Bind(this._config.GetSection("MySuperFilms"));
 #pragma warning restore IDE0022 // Use expression body for methods
 
         }

@@ -8,7 +8,7 @@ namespace MySuperFilm.ViewModels.DocumentTypes
     {
         public FilmLiteViewModel(IPublishedContent content)
         {
-            this.PosterUrl = content.Value<IPublishedContent>("poster").Url();
+            this.PosterUrl = content.Value<IPublishedContent>("poster").GetCropUrl("poster");
             this.FilmUrl = content.Url();
             this.Title = content.Value<string>("title");
             this.Categories = content.Value<IEnumerable<string>>("categories");
