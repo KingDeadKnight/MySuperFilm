@@ -1,6 +1,7 @@
 namespace MySuperFilm
 {
     using System;
+    using System.IO;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
@@ -10,7 +11,11 @@ namespace MySuperFilm
     using Umbraco.Cms.Core.DependencyInjection;
     using Umbraco.Extensions;
     using Data;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
+    using Umbraco.Cms.Core.Services.Implement;
+    using Umbraco.Cms.Infrastructure.PublishedCache;
+    using Umbraco.Cms.Web.Common;
 
     public class Startup
     {
@@ -83,6 +88,15 @@ namespace MySuperFilm
                     u.UseBackOfficeEndpoints();
                     u.UseWebsiteEndpoints();
                });
+
+            app.Use(async (context, next) =>
+                    {
+                        if (context.Request.Path.StartsWithSegments("/robots.txt"))
+                        {
+                            context.Response.Redirect("/umbraco/surface/SeoReferencing/robotsTxt");
+                        }
+                        else await next();
+                    });
         }
     }
 }

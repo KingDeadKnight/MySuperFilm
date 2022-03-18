@@ -1,0 +1,38 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+	Context.Response.ContentType = "text/xml";
+	var siteRoot = Model.Root();
+}
+@functions{
+    void RenderSiteMapUrlEntry(IPublishedContent node)
+    {
+        <url>
+            <loc>@node.Url(mode: UrlMode.Absolute)</loc>
+            <lastmod>@(string.Format("{0:s}+00:00", node.UpdateDate))</lastmod>
+        </url>
+
+    }
+
+    void RenderSiteMapUrlEntriesForChildren(IPublishedContent parentPage)
+    {
+        foreach (var page in parentPage.Children)
+        {
+            RenderSiteMapUrlEntry(page);
+            if (page.Children.Any())
+            {
+                RenderSiteMapUrlEntriesForChildren(page);
+            }
+        }
+
+    }
+
+}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemalocation="http://www.google.com/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    @{
+            RenderSiteMapUrlEntry(siteRoot);
+            RenderSiteMapUrlEntriesForChildren(siteRoot);
+
+    }
+</urlset>
