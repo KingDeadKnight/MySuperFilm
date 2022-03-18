@@ -10,5 +10,7 @@
         }
 
         public virtual DbSet<Data.Models.Comment> Comments { get; set; }
+
+        public virtual DbSet<Data.Models.TestEditor> TestEditors { get; set; }
     }
 }

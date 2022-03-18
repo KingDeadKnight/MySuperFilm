@@ -58,6 +58,7 @@ namespace MySuperFilm
                 .UseSqlServer(this._config.GetConnectionString("umbracoDbDSN"));
             services.AddScoped<DataContext>(_ => new DataContext(optionsBuilder.Options));
             services.AddTransient(typeof(ContentRepository));
+            services.AddTransient(typeof(TestEditorRepository));
             services.AddTransient(typeof(CommentRepository));
             services.AddTransient(typeof(OmdbApiRepository));
             services.AddHttpClient();

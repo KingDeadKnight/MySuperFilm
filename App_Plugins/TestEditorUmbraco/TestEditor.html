@@ -1,0 +1,15 @@
+<div ng-controller="TestEditorController as vm">
+    <div ng-if="vm.selectedValues.length > 0" ng-repeat="x in vm.selectedValues track by $index" class="row propertyEditorView">
+        <div class="TestEditorFlex">
+            <div class="umb-property-editor control-group testEditorSelect">
+                <label>{{vm.value}}</label>
+                <select name="dropDownList"
+                        class="umb-property-editor umb-select"
+                        ng-model="vm.selectedValues[$index]"
+                        ng-change="vm.selectedValuesChange($index)"
+                        ng-options="testEditor.value for testEditor in vm.testEditors">
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

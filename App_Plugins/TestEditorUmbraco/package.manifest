@@ -1,0 +1,20 @@
+﻿{
+  "propertyEditors": [
+    {
+      "alias": "MySuperFilm.TestEditor",
+      "name": "TestEditor",
+        "valueType": "string",
+        "editor": {
+            "view": "~/App_Plugins/TestEditorUmbraco/TestEditor.html",
+            "valueType": "string"
+        },
+    }
+  ],
+  "javascript": [
+        "~/App_Plugins/TestEditorUmbraco/TestEditor.controller.js",
+        "~/App_Plugins/TestEditorUmbraco/TestEditor.resource.js"
+  ],
+  "css": [
+        "~/App_Plugins/TestEditorUmbraco/TestEditor.css"
+  ]
+}

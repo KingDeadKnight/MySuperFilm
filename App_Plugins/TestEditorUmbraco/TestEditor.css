@@ -1,0 +1,8 @@
+.TestEditorFlex {
+    display: flex;
+    align-items: center;
+}
+
+.testEditorSelect {
+    padding-right: 1rem;
+}
